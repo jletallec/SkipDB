@@ -1,6 +1,9 @@
 import requests
+import os
 
-TMDB_API_KEY = "e19c83e77590c7f37f9290d93bb1b0e8"
+TMDB_API_KEY = os.environ.get("TMDB_API_KEY")
+if not TMDB_API_KEY:
+    raise RuntimeError("TMDB_API_KEY environment variable not set")
 
 def get_tmdb_show_id(imdb_id):
     url = f"https://api.themoviedb.org/3/find/{imdb_id}?api_key={TMDB_API_KEY}&external_source=imdb_id"
